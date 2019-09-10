@@ -118,17 +118,11 @@ final class Http {
 
     public static function processResp($response) {
         $data = json_decode($response['body'], true);
-        if ($response['http_code'] === 200) {
-            $result = array();
-            $result['body'] = $data;
-            $result['http_code'] = $response['http_code'];
-            $result['headers'] = $response['headers'];
-            return $result;
-        } elseif (is_null($data)) {
-            throw new ServiceNotAvaliable($response);
-        } else {
-            throw new APIRequestException($response);
-        }
+
+        $result['body'] = $data;
+        $result['http_code'] = $response['http_code'];
+        $result['headers'] = $response['headers'];
+        return $result;
     }
 
     public static function log($client, $content) {
